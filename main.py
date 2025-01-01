@@ -22,11 +22,17 @@ def main():
 
     #initialize the player
     player=Player(SCREEN_WIDTH/2,SCREEN_HEIGHT/2,PLAYER_RADIUS)
-
+    #initialize groups
+    drawable=pygame.sprite.Group()
+    updatable=pygame.sprite.Group()
+    Player.containers(drawable,updatable)
     #game loop
     while True:
         pygame.Surface.fill(screen,(0,0,0))
-        player.draw(screen)
+        for updtbl in updatable:
+            updtbl.update(dt)
+        for drwbl in drawable:
+            drwbl.draw(screen)
         pygame.display.flip()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
